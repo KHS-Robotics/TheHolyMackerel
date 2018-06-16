@@ -46,7 +46,7 @@ public class TankDrive extends SubsystemBase
 	{
 		initDefaultCommand();
 		OI io = new OI();
-		this.setDefaultCommand(new DriveWithJoysticks(io.j0, io.j1, io.t));
+		this.setDefaultCommand(new DriveWithJoysticks(io.j0, io.j1, io.drive));
 	}
 
 	@Override

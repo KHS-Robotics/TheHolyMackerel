@@ -64,9 +64,9 @@ public class DemonDashboard
 					//SmartDashboard.putNumber("Enc-ED", oi.Elevator.getDistance());
 					//SmartDashboard.putBoolean("Elev-AtBottom", oi.Elevator.isAtBottom());
 					
-					SmartDashboard.putNumber("Drive-LD", oi.Drive.getLeftDistance());
-					SmartDashboard.putNumber("Drive-RD", oi.Drive.getRightDistance());
-					SmartDashboard.putNumber("Drive-Heading", oi.Drive.getHeading());
+//					SmartDashboard.putNumber("Drive-LD", oi.drive.getLeftDistance());
+//					SmartDashboard.putNumber("Drive-RD", oi.drive.getRightDistance());
+//					SmartDashboard.putNumber("Drive-Heading", oi.drive.getHeading());
 					
 					Thread.sleep(50);
 				}
