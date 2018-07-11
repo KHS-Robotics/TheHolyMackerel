@@ -27,4 +27,9 @@ public abstract class SubsystemBase extends Subsystem {
 	public void initSendable(SendableBuilder builder) {
 		
 	}
+
+	public void resetNavX() {
+		
+		
+	}
 }

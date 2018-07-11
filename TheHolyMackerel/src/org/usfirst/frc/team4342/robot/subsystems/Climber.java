@@ -1,15 +1,15 @@
 package org.usfirst.frc.team4342.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.Victor;
 
 public class Climber extends SubsystemBase{
-	private Jaguar j0;
+	private Victor v0;
 	private Solenoid s;
 	
-	public Climber(Jaguar j0, Solenoid s)
+	public Climber(Victor v0, Solenoid s)
 	{
-		this.j0 = j0;
+		this.v0 = v0;
 		this.s = s;
 	}
 	
@@ -20,7 +20,7 @@ public class Climber extends SubsystemBase{
 	
 	public void winch(boolean b)
 	{
-		j0.set(1);
+		v0.set(1);
 	}
 	
 	@Override
