@@ -12,7 +12,7 @@ public class ElevateToSwitch extends CommandBase {
 	 * on the switch
 	 */
 	public ElevateToSwitch(Accumulator rotation) {
-		rotation.rotate(45);;
+		rotation.rotate(45);
 	}
 
 	@Override

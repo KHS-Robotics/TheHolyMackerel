@@ -1,5 +1,6 @@
 package org.usfirst.frc.team4342.robot.subsystems;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Victor;
 
@@ -7,12 +8,15 @@ public class Accumulator extends SubsystemBase
 {
 	private Victor left, right, rotate;
 	private Solenoid piston;
+	private DigitalInput limitLeft, limitRight;
 	
-	public Accumulator(Victor left, Victor right, Solenoid piston)
+	public Accumulator(Victor left, Victor right, Solenoid piston, DigitalInput limitLeft, DigitalInput limitRight)
 	{
 		this.left = left;
 		this.right = right;
 		this.piston = piston;
+		this.limitLeft = limitLeft;
+		this.limitRight = limitRight;
 	}
 	
 	public void blow(double power)
@@ -28,7 +32,8 @@ public class Accumulator extends SubsystemBase
 	
 	public void rotate(double y) 
 	{
-		rotate.set(y);
+		if(!limitLeft.get() && !limitRight.get())
+			rotate.set(y);
 	}
 	
 	public void suck()
