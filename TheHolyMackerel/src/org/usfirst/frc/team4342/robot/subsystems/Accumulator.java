@@ -33,7 +33,7 @@ public class Accumulator extends SubsystemBase
 	public void rotate(double y) 
 	{
 		if(!limitLeft.get() && !limitRight.get())
-			rotate.set(y);
+			rotate.setPosition(y);
 	}
 	
 	public void suck()

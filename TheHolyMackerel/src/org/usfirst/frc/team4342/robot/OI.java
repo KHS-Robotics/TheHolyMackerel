@@ -33,6 +33,7 @@ public class OI
 	public final Spark t2= new Spark(0);
 	private Encoder e1 = new Encoder(0,0);
 	private Encoder e2 = new Encoder(0,0);
+	private Encoder e3 = new Encoder(0,0);
 	private Victor v0 = new Victor(0);
 	private Victor v1 = new Victor(0);
 	private Victor v2 = new Victor(0);

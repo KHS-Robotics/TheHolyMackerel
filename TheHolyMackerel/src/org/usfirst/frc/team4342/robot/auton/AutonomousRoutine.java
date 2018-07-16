@@ -19,6 +19,10 @@ public abstract class AutonomousRoutine extends CommandGroup {
 		// Start Position and Switch location are the same
 		protected static final double LEFT_RIGHT_PANEL_ALIGN_DISTANCE = 168;
 		protected static final double LEFT_RIGHT_SWITCH_DISTANCE = 60 - (ROBOT_X / 2);
+		protected static final double LEFT_RIGHT_MOVE_FROM_WALL = 72;
+		protected static final double LEFT_RIGHT_ALIGN_TO_ZONE = 109.5 - ROBOT_X;
+		protected static final double LEFT_RIGHT_MOVE_TO_SWITCH = 72 - ROBOT_Y;
+		protected static final double LEFT_RIGHT_MOVE_TO_CUBE_DISTANCE = ROBOT_Y/2;
 		// Start Position and Switch location are opposite
 		protected static final double LEFT_RIGHT_PAST_SWITCH_DISTANCE = 210;
 		protected static final double LEFT_RIGHT_PAST_SWITCH_ALIGN_DISTANCE = 180 - (ROBOT_X/2);

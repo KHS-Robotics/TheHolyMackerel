@@ -3,7 +3,7 @@ package org.usfirst.frc.team4342.robot.commands;
 import org.usfirst.frc.team4342.robot.OI;
 import org.usfirst.frc.team4342.robot.subsystems.Accumulator;
 
-public class Accumulate {
+public class Accumulate extends CommandBase{
 	private Accumulator a;
 	private OI io = OI.getInstance();
 	
@@ -22,10 +22,7 @@ public class Accumulate {
 	
 	public void pull() 
 	{
-		if(io.jb1.get())
-		{
 			a.suck();
-		}
 	}
 	
 	public void grab()
@@ -43,5 +40,28 @@ public class Accumulate {
 	public void rotate()
 	{
 		a.rotate(io.j2.getY());
+	}
+
+	@Override
+	protected void initialize() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void execute() {
+		
+	}
+
+	@Override
+	protected boolean isFinished() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	protected void end() {
+		// TODO Auto-generated method stub
+		
 	}
 }
