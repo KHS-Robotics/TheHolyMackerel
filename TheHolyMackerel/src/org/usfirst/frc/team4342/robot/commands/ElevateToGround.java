@@ -7,12 +7,15 @@ import org.usfirst.frc.team4342.robot.subsystems.Accumulator;
  * on the switch
  */
 public class ElevateToGround extends CommandBase {
+	private Accumulator rotation;
+
 	/**
 	 * Sets the rotation of the arm to place a cube
 	 * on the switch
 	 */
 	public ElevateToGround(Accumulator rotation) {
-		rotation.rotate(0);
+		this.requires(rotation);
+		this.rotation = rotation;
 	}
 
 	@Override
@@ -23,7 +26,7 @@ public class ElevateToGround extends CommandBase {
 
 	@Override
 	protected void execute() {
-		// TODO Auto-generated method stub
+		rotation.rotate(0);
 		
 	}
 

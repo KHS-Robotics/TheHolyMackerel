@@ -1,12 +1,15 @@
 package org.usfirst.frc.team4342.robot.commands;
 
+import org.usfirst.frc.team4342.robot.OI;
 import org.usfirst.frc.team4342.robot.subsystems.Climber;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class StartClimber extends CommandGroup {
+public class WinchClimber extends CommandGroup {
 	private Climber c;
-	public StartClimber(Climber c)
+	private OI io = OI.getInstance();
+	
+	public WinchClimber(Climber c)
 	{
 		this.requires(c);
 		this.c = c;
@@ -14,8 +17,7 @@ public class StartClimber extends CommandGroup {
 
 	@Override
 	protected void execute() {
-		this.addSequential(new LaunchClimber(c));
-		this.addSequential(new WinchClimber(c), 100.0);
+	c.winch(true);
 	}
 
 	@Override

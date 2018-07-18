@@ -9,6 +9,7 @@ public class Accumulate extends CommandBase{
 	
 	public Accumulate(Accumulator a)
 	{
+		this.requires(a);
 		this.a = a;
 	}
 	

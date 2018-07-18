@@ -9,6 +9,7 @@ public class DriveWithJoysticks extends CommandBase{
 	private TankDrive t;
 	
 	public DriveWithJoysticks(Joystick j0, Joystick j1, TankDrive t) {
+		this.requires(t);
 		this.j0 = j0;
 		this.j1 = j1;
 		this.t = t;
@@ -23,7 +24,7 @@ public class DriveWithJoysticks extends CommandBase{
 	@Override
 	protected void execute() {
 		// TODO Auto-generated method stub
-		t.drive(j0.getY(), j1.getY());
+		t.drive(deadband(j0), deadband(j1));
 	}
 
 	@Override
@@ -36,5 +37,15 @@ public class DriveWithJoysticks extends CommandBase{
 	protected void end() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	protected double deadband(Joystick joystick) {
+		if(Math.abs(joystick.getY()) < 0.1) {
+			return 0;
+		}
+	    else
+	    {
+	    	return joystick.getY();
+	    }
 	}
 }
