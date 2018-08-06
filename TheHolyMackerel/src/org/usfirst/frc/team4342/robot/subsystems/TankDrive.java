@@ -1,9 +1,7 @@
 package org.usfirst.frc.team4342.robot.subsystems;
 
 import org.usfirst.frc.team4342.robot.OI;
-import org.usfirst.frc.team4342.robot.commands.DriveWithJoysticks;
-
-import com.ctre.phoenix.motorcontrol.NeutralMode;
+import org.usfirst.frc.team4342.robot.commands.DriveTankWithJoysticks;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.Encoder;
@@ -13,7 +11,7 @@ public class TankDrive extends DriveTrainBase
 {
 	private Spark driveR, driveL;
 	private Encoder encR, encL;
-	private AHRS navx;
+	private double direction;
 	
 	public TankDrive(Spark driveR, Spark driveL, AHRS navx, Encoder encR, Encoder encL)
 	{
@@ -23,10 +21,9 @@ public class TankDrive extends DriveTrainBase
 		this.driveL = driveL;
 		this.encR = encR;
 		this.encL = encL;
-		this.navx = navx;
 	}
 	
-	public void drive(double left, double right)
+	public void set(double left, double right)
 	{
 		driveR.set(right);
 		driveL.set(left);
@@ -48,12 +45,6 @@ public class TankDrive extends DriveTrainBase
 		return encR.getDistance();
 	}
 	
-	public void setNeutralMode(NeutralMode mode)
-	{
-		driveR.free();
-		driveL.free();
-	}
-	
 	@Override
 	public void resetNavX() 
 	{
@@ -63,21 +54,22 @@ public class TankDrive extends DriveTrainBase
 	@Override
 	protected void initDefaultCommand()
 	{
-		initDefaultCommand();
-		OI io = new OI();
-		this.setDefaultCommand(new DriveWithJoysticks(io.j0, io.j1, io.drive));
+		OI oi = OI.getInstance();
+		this.setDefaultCommand(new DriveTankWithJoysticks(oi.LeftJoystick, oi.RightJoystick, oi.Drive));
 	}
 
 	@Override
 	public void stop() {
-		// TODO Auto-generated method stub
-		
+		driveR.set(0);
+		driveL.set(0);
 	}
 
 	@Override
 	public void pidWrite(double output) {
-		// TODO Auto-generated method stub
-		
+		double left = direction + output;
+		double right = direction - output;	
+		driveL.set(left);
+		driveR.set(right);
 	}
 
 	@Override
@@ -88,13 +80,26 @@ public class TankDrive extends DriveTrainBase
 
 	@Override
 	public double remainingDistance(double distance, double[] distances) {
-		// TODO Auto-generated method stub
-		return 0;
+		final double initialRight = distances[0];
+		final double initialLeft = distances[1];
+
+		final double CURRENT_RIGHT_VAL = Math.abs(getRightDistance());
+		final double CURRENT_LEFT_VAL = Math.abs(getLeftDistance());
+		final double DELTA_RIGHT = Math.abs(CURRENT_RIGHT_VAL - initialRight);
+		final double DELTA_LEFT = Math.abs(CURRENT_LEFT_VAL - initialLeft);
+		
+		final double AVERAGE = (DELTA_RIGHT + DELTA_LEFT) / 2;
+		
+		final double REMAINING = distance - AVERAGE;
+		
+		return REMAINING;
 	}
 
 	@Override
 	public double[] getAllDistances() {
-		// TODO Auto-generated method stub
-		return null;
+		return new double[] {
+				Math.abs(getRightDistance()),
+				Math.abs(getLeftDistance())
+			};
 	}
 }

@@ -6,48 +6,50 @@ import edu.wpi.first.wpilibj.Victor;
 
 public class Accumulator extends SubsystemBase 
 {
-	private Victor left, right, rotate;
-	private Solenoid piston;
-	private DigitalInput limitLeft, limitRight;
+	private Victor motor;
+	private Solenoid squeezer;
 	
-	public Accumulator(Victor left, Victor right, Solenoid piston, DigitalInput limitLeft, DigitalInput limitRight)
+	private boolean intaking, releasing;
+	
+	public Accumulator(Victor motor, Solenoid squeezer)
 	{
-		this.left = left;
-		this.right = right;
-		this.piston = piston;
-		this.limitLeft = limitLeft;
-		this.limitRight = limitRight;
+		this.motor = motor;
+		this.squeezer = squeezer;
 	}
 	
-	public void blow(double power)
-	{
-		this.left.set(-power);
-		this.right.set(power);
+	public void intake() {
+		if(intaking) 
+			return;
+		
+		intaking = true;
+		releasing = false;
+		motor.set(0.67);
 	}
 	
-	public void grab(boolean b)
-	{
-		piston.set(b);
+	public void release() {
+		if(releasing) 
+			return;
+		
+		releasing = true;
+		intaking = false;
+		motor.set(-0.5);
 	}
 	
-	public void rotate(double y) 
-	{
-		if(!limitLeft.get() && !limitRight.get())
-			rotate.setPosition(y);
+	public void setSqueezer(boolean squeezing) {
+		if(isSqueezing() == squeezing)
+			return;
+		
+		squeezer.set(squeezing);
 	}
 	
-	public void suck()
-	{
-		left.set(1);
-		right.set(-1);
+	public boolean isSqueezing() {
+		return squeezer.get();
 	}
 	
 	@Override
 	public void stop() 
 	{
-		left.set(0);
-		right.set(0);
-		piston.set(false);
+		motor.set(0);
 	}
 	
 	

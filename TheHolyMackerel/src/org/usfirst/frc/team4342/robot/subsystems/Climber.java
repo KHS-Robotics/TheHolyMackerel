@@ -4,28 +4,28 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Victor;
 
 public class Climber extends SubsystemBase{
-	private Victor v0;
-	private Solenoid s;
+	private Victor motor;
+	private Solenoid shooter;
 	
-	public Climber(Victor v0, Solenoid s)
+	public Climber(Victor motor, Solenoid shooter)
 	{
-		this.v0 = v0;
-		this.s = s;
+		this.motor = motor;
+		this.shooter = shooter;
 	}
 	
-	public void boing(boolean b)
+	public void boing()
 	{
-		s.set(b);
+		shooter.set(true);
 	}
 	
-	public void winch(boolean b)
+	public void enable()
 	{
-		v0.set(1);
+		motor.set(1);
 	}
 	
 	@Override
 	public void stop() {
-		// TODO Auto-generated method stub
+		motor.set(0);
 		
 	}
 

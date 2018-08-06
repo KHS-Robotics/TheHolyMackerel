@@ -24,16 +24,12 @@ public class ButtonMap
 		}
 	}
 	
-	/**
-	 * Switch Box to control the Accumualtor. Note that
-	 * switches 3, 7, 8, 9, and 12 are reversed. Meaning,
-	 * they read true when flipped down and false when flipped up.
-	 */
-	public static class SwitchBox
+
+	public static class Operator
 	{
 		public static final int INTAKE = 5;
 		public static final int RELEASE = 4;
-		public static final int CLIMB = 7;
+		public static final int CLIMB_WITH_SHOOTER = 2;
 		public static final int RESET = 10;
 		public static final int ELEVATE_SCALE_HIGH = 2;
 		public static final int ELEVATE_SCLALE_NEUTRAL = 11;

@@ -56,7 +56,7 @@ public abstract class AutonomousRoutine extends CommandGroup {
 		
 		@Override
 		protected void initialize() {
-			OI.getInstance().drive.resetNavX();
+			OI.getInstance().Drive.resetNavX();
 		}
 		
 		/**

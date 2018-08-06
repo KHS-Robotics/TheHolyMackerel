@@ -60,13 +60,21 @@ public class DemonDashboard
 					SmartDashboard.putNumber("NavX-Yaw", oi.NavX.getYaw());
 					SmartDashboard.putNumber("NavX-Roll", oi.NavX.getRoll());
 					SmartDashboard.putNumber("NavX-Pitch", oi.NavX.getPitch());
+
+					if(oi.Drive != null)
+					{
+						double[] distances = oi.Drive.getAllDistances();
+						SmartDashboard.putNumber("Drive-Enc-Right", distances[0]);
+						SmartDashboard.putNumber("Drive-Enc-Left", distances[1]);
+					}
 					
-					//SmartDashboard.putNumber("Enc-ED", oi.Elevator.getDistance());
-					//SmartDashboard.putBoolean("Elev-AtBottom", oi.Elevator.isAtBottom());
-					
-//					SmartDashboard.putNumber("Drive-LD", oi.drive.getLeftDistance());
-//					SmartDashboard.putNumber("Drive-RD", oi.drive.getRightDistance());
-//					SmartDashboard.putNumber("Drive-Heading", oi.drive.getHeading());
+					if(oi.Arm != null)
+					{
+						SmartDashboard.putNumber("Arm-Enc", oi.Arm.getPosition());
+						SmartDashboard.putBoolean("Arm-LS-Front", oi.Arm.isFullyForward());
+						SmartDashboard.putBoolean("Arm-LS-Rear", oi.Arm.isFullyBack());
+						
+					}
 					
 					Thread.sleep(50);
 				}

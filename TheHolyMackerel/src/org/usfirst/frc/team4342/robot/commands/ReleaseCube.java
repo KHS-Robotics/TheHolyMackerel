@@ -8,25 +8,24 @@ import org.usfirst.frc.team4342.robot.subsystems.Accumulator;
  */
 public class ReleaseCube extends CommandBase 
 {
-	private Accumulator intake;
+	private Accumulator accum;
 	
 	/**
 	 * Command to release a cube in autonomous. This command
 	 * will enable the release for 2 seconds.
-	 * @param intake the intake
+	 * @param accum the accum
 	 */
-	public ReleaseCube(Accumulator intake)
+	public ReleaseCube(Accumulator accum)
 	{
 		super(2);
 		
-		this.intake = intake;
-		this.requires(intake);
+		this.accum = accum;
+		this.requires(accum);
 	}
 
 	@Override
 	protected void initialize() {
-		intake.grab(false);
-		intake.blow(1.0);
+		accum.release();
 		
 	}
 
@@ -40,8 +39,7 @@ public class ReleaseCube extends CommandBase
 
 	@Override
 	protected void end() {
-		intake.stop();
-		intake.grab(true);
+		accum.stop();
 	}
 
 }

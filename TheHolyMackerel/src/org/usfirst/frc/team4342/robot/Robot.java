@@ -6,15 +6,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team4342.robot.auton.AutoBaseline;
-import org.usfirst.frc.team4342.robot.auton.AutoSwitch;
+//import org.usfirst.frc.team4342.robot.auton.AutoSwitch;
 import org.usfirst.frc.team4342.robot.auton.AutonomousRoutine;
 import org.usfirst.frc.team4342.robot.auton.Priority;
 import org.usfirst.frc.team4342.robot.auton.StartPosition;
 import org.usfirst.frc.team4342.robot.logging.DemonDashboard;
 import org.usfirst.frc.team4342.robot.logging.Logger;
 import org.usfirst.frc.team4342.robot.logging.PDPLogger;
-
-import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 /**
  * Main Robot Class
@@ -66,7 +64,6 @@ public class Robot extends TimedRobot {
 	public void teleopInit() {
 		Logger.info("Entering teleop...");
 		stopAutonomousRoutine();
-		OI.getInstance().drive.setNeutralMode(NeutralMode.Brake);
 	}
 
 	/**
@@ -74,8 +71,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-//		Scheduler.getInstance().run();
-		OI.getInstance().t1.set(1);
+		Scheduler.getInstance().run();
 	}
 	
 	/**
@@ -85,8 +81,7 @@ public class Robot extends TimedRobot {
 	public void autonomousInit() {
 		Logger.info("Entering autonomous...");
 		stopAutonomousRoutine();
-		
-		OI.getInstance().drive.setNeutralMode(NeutralMode.Brake);
+
 		
 		final OI oi = OI.getInstance();
 
@@ -95,19 +90,19 @@ public class Robot extends TimedRobot {
 		switch(priorityChooser.getSelected()) {
 			case BASELINE:
 				routine = "AutoBaseline";
-				autonomousRoutine = new AutoBaseline(position, oi.drive);
+				autonomousRoutine = new AutoBaseline(position, oi.Drive);
 			break;
 			
 			case SWITCH:
 				routine = "AutoSwitch";
-				autonomousRoutine = new AutoSwitch(position, oi.drive, oi.acc);
+				//autonomousRoutine = new AutoSwitch(position, oi.Drive, oi.Accum);
 			break;
 			
 			
 			default:
 				routine = null;
 				Logger.warning("Auto priority could not be determined! Crossing auto line!");
-				autonomousRoutine = new AutoBaseline(position, oi.drive);
+				autonomousRoutine = new AutoBaseline(position, oi.Drive);
 		}
 
 		if(routine != null)
@@ -132,7 +127,6 @@ public class Robot extends TimedRobot {
 	public void disabledInit() {
 		Logger.info("Entering disabled...");
 		stopAutonomousRoutine();
-		OI.getInstance().drive.setNeutralMode(NeutralMode.Coast);
 		Scheduler.getInstance().run();
 	}
 	
