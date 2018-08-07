@@ -28,8 +28,10 @@ public class ButtonMap
 	public static class Operator
 	{
 		public static final int INTAKE = 5;
+		public static final int SQUEEZE = 6;
 		public static final int RELEASE = 4;
-		public static final int CLIMB_WITH_SHOOTER = 2;
+		public static final int LAUNCH_SHOOTER = 2;
+		public static final int START_CLIMBER = 3;
 		public static final int RESET = 10;
 		public static final int ELEVATE_SCALE_HIGH = 2;
 		public static final int ELEVATE_SCLALE_NEUTRAL = 11;

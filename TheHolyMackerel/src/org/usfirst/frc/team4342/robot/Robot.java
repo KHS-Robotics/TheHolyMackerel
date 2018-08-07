@@ -1,5 +1,7 @@
 package org.usfirst.frc.team4342.robot;
 
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -54,7 +56,12 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("D-I" , 0.0);
 		SmartDashboard.putNumber("D-D" , 0.0);
 		
-		Logger.info("Finished bootstrapping Demonator7.");
+		Logger.info("Starting USB Camera on dev0...");
+		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture(0);
+		camera.setFPS(20);
+		camera.setResolution(320, 200);
+		
+		Logger.info("Finished bootstrapping TheHolyMackerel.");
 	}
 	
 	/**

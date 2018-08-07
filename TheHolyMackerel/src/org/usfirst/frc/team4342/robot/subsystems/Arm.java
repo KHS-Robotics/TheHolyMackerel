@@ -1,7 +1,7 @@
 package org.usfirst.frc.team4342.robot.subsystems;
 
 import org.usfirst.frc.team4342.robot.OI;
-import org.usfirst.frc.team4342.robot.commands.ArmControlWithJoystick;
+import org.usfirst.frc.team4342.robot.commands.arm.ArmControlWithJoystick;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;

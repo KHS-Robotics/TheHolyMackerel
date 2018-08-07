@@ -28,8 +28,4 @@ public abstract class SubsystemBase extends Subsystem {
 		
 	}
 
-	public void resetNavX() {
-		
-		
-	}
 }

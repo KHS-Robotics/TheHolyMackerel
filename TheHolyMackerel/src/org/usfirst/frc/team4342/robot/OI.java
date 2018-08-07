@@ -1,11 +1,13 @@
 package org.usfirst.frc.team4342.robot;
 
-import org.usfirst.frc.team4342.robot.commands.StartAccumulator;
-import org.usfirst.frc.team4342.robot.commands.StartClimber;
-import org.usfirst.frc.team4342.robot.commands.StartRelease;
 import org.usfirst.frc.team4342.robot.commands.StopSubsystem;
+import org.usfirst.frc.team4342.robot.commands.climber.LaunchClimber;
+import org.usfirst.frc.team4342.robot.commands.climber.WinchClimber;
+import org.usfirst.frc.team4342.robot.commands.intake.SetSqueezer;
+import org.usfirst.frc.team4342.robot.commands.intake.StartIntake;
+import org.usfirst.frc.team4342.robot.commands.intake.StartRelease;
 import org.usfirst.frc.team4342.robot.logging.Logger;
-import org.usfirst.frc.team4342.robot.subsystems.Accumulator;
+import org.usfirst.frc.team4342.robot.subsystems.Intake;
 import org.usfirst.frc.team4342.robot.subsystems.Arm;
 import org.usfirst.frc.team4342.robot.subsystems.Climber;
 import org.usfirst.frc.team4342.robot.subsystems.TankDrive;
@@ -16,6 +18,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.Victor;
@@ -58,7 +61,7 @@ public class OI
 	private Victor ArmMotor;
 	private Victor ClimberMotor;
 	
-	private Solenoid squeezer;
+	private DoubleSolenoid squeezer;
 	private Solenoid shooter;
 	
 	private DigitalInput limitFront;
@@ -67,14 +70,15 @@ public class OI
 	public AHRS NavX;
 	
 	public TankDrive Drive;
-	public Accumulator Accum;
+	public Intake Accum;
 	public Arm Arm;
 	public Climber Climber;
 	
 	// Joysticks
-	public final Joystick LeftJoystick = new Joystick(0);
-	public final Joystick RightJoystick = new Joystick(1);
-	public final Joystick OperatorJoystick = new Joystick(2);
+	public final Joystick LeftJoystick = new Joystick(RobotMap.LEFT_DRIVE_JOYSTICK);
+	public final Joystick RightJoystick = new Joystick(RobotMap.RIGHT_DRIVE_JOYSTICK);
+	public final Joystick ArmJoystick = new Joystick(RobotMap.ARM_JOYSTICK);
+	public final Joystick IntakeJoystick = new Joystick(RobotMap.INTAKE_JOYSTICK);
 	
 	private void initDrive() {
 		try {
@@ -116,18 +120,22 @@ public class OI
 			
 			// Intake
 			IntakeMotor = new Victor(RobotMap.INTAKE);
-			squeezer = new Solenoid(RobotMap.SQUEEZER);
-			Accum = new Accumulator(IntakeMotor, squeezer);
+			squeezer = new DoubleSolenoid(RobotMap.SQUEEZER_A, RobotMap.SQUEEZER_B);
+			Accum = new Intake(IntakeMotor, squeezer);
 
 			// Switch to enable the intake for a cube
-			JoystickButton intakeSwitch = new JoystickButton(OperatorJoystick, ButtonMap.Operator.INTAKE);
-			intakeSwitch.whenPressed(new StartAccumulator(Accum));
+			JoystickButton intakeSwitch = new JoystickButton(IntakeJoystick, ButtonMap.Operator.INTAKE);
+			intakeSwitch.whenPressed(new StartIntake(Accum));
 			intakeSwitch.whenReleased(new StopSubsystem(Accum));
 						
 			// Switch to enable reverse intake to release a cube
-			JoystickButton releaseSwitch = new JoystickButton(OperatorJoystick, ButtonMap.Operator.RELEASE);
+			JoystickButton releaseSwitch = new JoystickButton(IntakeJoystick, ButtonMap.Operator.RELEASE);
 			releaseSwitch.whenPressed(new StartRelease(Accum));
 			releaseSwitch.whenReleased(new StopSubsystem(Accum));
+			
+			JoystickButton openSqueezer = new JoystickButton(IntakeJoystick, ButtonMap.Operator.SQUEEZE);
+			intakeSwitch.whenPressed(new SetSqueezer(Accum, false));
+			intakeSwitch.whenReleased(new SetSqueezer(Accum, true));
 			
 		} catch(Exception ex) {
 			Logger.error("Failed to initialize Intake!", ex);
@@ -143,9 +151,13 @@ public class OI
 			
 			Climber = new Climber(ClimberMotor, shooter);
 			
-			JoystickButton climbWithShooter = new JoystickButton(OperatorJoystick, ButtonMap.Operator.CLIMB_WITH_SHOOTER);
-			climbWithShooter.whenPressed(new StartClimber(Climber));
-			climbWithShooter.whenReleased(new StopSubsystem(Climber));
+			JoystickButton launchShooter = new JoystickButton(IntakeJoystick, ButtonMap.Operator.LAUNCH_SHOOTER);
+			launchShooter.whenPressed(new LaunchClimber(Climber));
+			
+			
+			JoystickButton startClimber = new JoystickButton(IntakeJoystick, ButtonMap.Operator.START_CLIMBER);
+			startClimber.whenPressed(new WinchClimber(Climber));
+			startClimber.whenReleased(new StopSubsystem(Climber));
 			
 		} catch(Exception ex) {
 			Logger.error("Failed to initialize Climber!", ex);

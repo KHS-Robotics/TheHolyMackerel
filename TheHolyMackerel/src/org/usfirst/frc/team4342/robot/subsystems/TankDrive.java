@@ -1,7 +1,8 @@
 package org.usfirst.frc.team4342.robot.subsystems;
 
 import org.usfirst.frc.team4342.robot.OI;
-import org.usfirst.frc.team4342.robot.commands.DriveTankWithJoysticks;
+import org.usfirst.frc.team4342.robot.commands.drive.DriveTankWithJoysticks;
+
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.Encoder;
