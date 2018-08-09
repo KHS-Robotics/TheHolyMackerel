@@ -63,9 +63,8 @@ public class DemonDashboard
 
 					if(oi.Drive != null)
 					{
-						double[] distances = oi.Drive.getAllDistances();
-						SmartDashboard.putNumber("Drive-Enc-Right", distances[0]);
-						SmartDashboard.putNumber("Drive-Enc-Left", distances[1]);
+						SmartDashboard.putNumber("Drive-Enc-Right", oi.Drive.getRightDistance());
+						SmartDashboard.putNumber("Drive-Enc-Left", oi.Drive.getLeftDistance());
 					}
 					
 					if(oi.Arm != null)

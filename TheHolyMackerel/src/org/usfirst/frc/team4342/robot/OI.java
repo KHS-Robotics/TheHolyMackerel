@@ -38,6 +38,12 @@ public class OI
 		initIntake();
 		initArm();
 		initClimber();
+		
+		rgbPower = new Solenoid(RobotMap.RBG_POWER);
+		red = new Solenoid(RobotMap.RED);
+		blue = new Solenoid(RobotMap.BLUE);
+		green = new Solenoid(RobotMap.GREEN);
+		AwesomeLights.start(rgbPower, red, green, blue);
 	}
 	/**
 	 * Gets the instance of the Operator Interface
@@ -62,7 +68,7 @@ public class OI
 	private Victor ClimberMotor;
 	
 	private DoubleSolenoid squeezer;
-	private Solenoid shooter;
+	private Solenoid shooter, rgbPower, red, blue, green;
 	
 	private DigitalInput limitFront;
 	private DigitalInput limitBack;
@@ -91,7 +97,7 @@ public class OI
 			LeftDriveEncoder = new Encoder(RobotMap.DRIVE_LEFT_ENC_A, RobotMap.DRIVE_LEFT_ENC_B);
 			RightDriveEncoder = new Encoder(RobotMap.DRIVE_RIGHT_ENC_A, RobotMap.DRIVE_RIGHT_ENC_B);
 			
-			Drive = new TankDrive(LeftDriveMotor, RightDriveMotor, NavX, LeftDriveEncoder, RightDriveEncoder);
+			Drive = new TankDrive(RightDriveMotor, LeftDriveMotor,  NavX, RightDriveEncoder, LeftDriveEncoder);
 			
 		} catch(Exception ex) {
 			Logger.error("Failed to initialize Drive!", ex);

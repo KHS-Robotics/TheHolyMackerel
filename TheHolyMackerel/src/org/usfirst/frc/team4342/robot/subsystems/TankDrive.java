@@ -26,7 +26,7 @@ public class TankDrive extends DriveTrainBase
 	
 	public void set(double left, double right)
 	{
-		driveR.set(right);
+		driveR.set(-right);
 		driveL.set(left);
 	}
 	
@@ -69,8 +69,7 @@ public class TankDrive extends DriveTrainBase
 	public void pidWrite(double output) {
 		double left = direction + output;
 		double right = direction - output;	
-		driveL.set(left);
-		driveR.set(right);
+		set(left, right);
 	}
 
 	@Override

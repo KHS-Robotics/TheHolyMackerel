@@ -27,8 +27,8 @@ public class RobotMap {
 	// Encoders
 	public static final int DRIVE_LEFT_ENC_A = 4;
 	public static final int DRIVE_LEFT_ENC_B = 5;
-	public static final int DRIVE_RIGHT_ENC_A = 2;
-	public static final int DRIVE_RIGHT_ENC_B = 3;
+	public static final int DRIVE_RIGHT_ENC_A = 3;
+	public static final int DRIVE_RIGHT_ENC_B = 2;
 	public static final int ARM_ENC_A = 6;
 	public static final int ARM_ENC_B = 7;
 	
@@ -37,5 +37,9 @@ public class RobotMap {
 	public static final int SQUEEZER_B = 1;
 	public static final int SHOOTER = 2;
 	
-	
+	// RGB
+	public static final int RBG_POWER = 4;
+	public static final int RED = 6;
+	public static final int GREEN = 5;
+	public static final int BLUE = 7;
 }

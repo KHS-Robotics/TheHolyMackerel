@@ -73,20 +73,20 @@ public class Arm extends PIDSubsystem {
 	}
 	
 	public boolean isFullyForward() {
-		return frontLS.get();
+		return !frontLS.get();
 	}
 	
 	public boolean isFullyBack() {
-		return rearLS.get();
+		return !rearLS.get();
 	}
 	
 	public void set(double output) {
-		if (output < 0 && frontLS.get()) {
+		if (output > 0 && isFullyForward()) {
 			stop();
 			return;
 		}
 		
-		if (output > 0 && rearLS.get()) {
+		if (output < 0 && isFullyBack()) {
 			stop();
 			return;
 		}

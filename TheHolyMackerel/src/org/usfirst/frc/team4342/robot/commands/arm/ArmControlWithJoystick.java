@@ -25,11 +25,11 @@ public class ArmControlWithJoystick extends CommandBase
 
 	@Override
 	protected void execute() {
-		double output = oi.ArmJoystick.getY();
+		double output = -oi.ArmJoystick.getY();
 		
 		if(Math.abs(output) > DEADBAND) 
 		{
-			arm.set(output);
+			arm.set(output / 2.5);
 		} 
 		else 
 		{

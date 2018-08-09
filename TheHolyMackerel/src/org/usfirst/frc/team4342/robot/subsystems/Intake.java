@@ -32,7 +32,7 @@ public class Intake extends SubsystemBase
 		
 		intaking = true;
 		releasing = false;
-		motor.set(0.67);
+		set(0.67);
 	}
 	
 	public void release() {
@@ -41,7 +41,7 @@ public class Intake extends SubsystemBase
 		
 		releasing = true;
 		intaking = false;
-		motor.set(-0.5);
+		set(-0.5);
 	}
 	
 	public void set(double output) {
@@ -52,17 +52,19 @@ public class Intake extends SubsystemBase
 		if(isSqueezing() == squeezing)
 			return;
 		
-		squeezer.set(DoubleSolenoid.Value.kForward);
+		squeezer.set(squeezing ? DoubleSolenoid.Value.kReverse : DoubleSolenoid.Value.kOff);
 	}
 	
 	public boolean isSqueezing() {
-		return squeezer.get() == DoubleSolenoid.Value.kForward;
+		return squeezer.get() == DoubleSolenoid.Value.kReverse;
 	}
 	
 	@Override
 	public void stop() 
 	{
 		motor.set(0);
+		releasing = false;
+		intaking = false;
 	}
 	
 	

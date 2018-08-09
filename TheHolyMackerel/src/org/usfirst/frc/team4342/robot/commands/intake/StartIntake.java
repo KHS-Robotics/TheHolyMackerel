@@ -1,29 +1,44 @@
 package org.usfirst.frc.team4342.robot.commands.intake;
 
+import org.usfirst.frc.team4342.robot.commands.CommandBase;
 import org.usfirst.frc.team4342.robot.subsystems.Intake;
-import edu.wpi.first.wpilibj.command.InstantCommand;
 
 /**
  * Starts the intake to pick up a cube
  */
-public class StartIntake extends InstantCommand 
+public class StartIntake extends CommandBase 
 {
-	private Intake accum;
+	private Intake intake;
 	
 	/**
 	 * Starts the intake
-	 * @param accum the intake
+	 * @param intake the intake
 	 */
-	public StartIntake(Intake accum)
+	public StartIntake(Intake intake)
 	{
-		this.requires(accum);
-		this.accum = accum;
+		this.requires(intake);
+		this.intake = intake;
 	}
 	
 	@Override
 	protected void initialize()
 	{
-		accum.enable();
+		intake.enable();
+	}
+	
+	@Override
+	public boolean isFinished()
+	{
+		return false;
 	}
 
+	@Override
+	protected void execute() {
+		
+	}
+
+	@Override
+	protected void end() {
+		intake.stop();
+	}
 }
