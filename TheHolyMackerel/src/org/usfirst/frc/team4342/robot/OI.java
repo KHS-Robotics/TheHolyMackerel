@@ -28,7 +28,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 public class OI
 {
 	private static OI instance;
-	public PowerDistributionPanel PDP;
+	public final PowerDistributionPanel PDP;
 	
 	private OI() {
 		PDP = new PowerDistributionPanel();
@@ -124,18 +124,18 @@ public class OI
 			Accum = new Intake(IntakeMotor, squeezer);
 
 			// Switch to enable the intake for a cube
-			JoystickButton intakeSwitch = new JoystickButton(IntakeJoystick, ButtonMap.Operator.INTAKE);
+			JoystickButton intakeSwitch = new JoystickButton(IntakeJoystick, ButtonMap.Operator.Intake.INTAKE);
 			intakeSwitch.whenPressed(new StartIntake(Accum));
 			intakeSwitch.whenReleased(new StopSubsystem(Accum));
 						
 			// Switch to enable reverse intake to release a cube
-			JoystickButton releaseSwitch = new JoystickButton(IntakeJoystick, ButtonMap.Operator.RELEASE);
+			JoystickButton releaseSwitch = new JoystickButton(IntakeJoystick, ButtonMap.Operator.Intake.RELEASE);
 			releaseSwitch.whenPressed(new StartRelease(Accum));
 			releaseSwitch.whenReleased(new StopSubsystem(Accum));
 			
-			JoystickButton openSqueezer = new JoystickButton(IntakeJoystick, ButtonMap.Operator.SQUEEZE);
-			intakeSwitch.whenPressed(new SetSqueezer(Accum, false));
-			intakeSwitch.whenReleased(new SetSqueezer(Accum, true));
+			JoystickButton openSqueezer = new JoystickButton(IntakeJoystick, ButtonMap.Operator.Intake.SQUEEZE);
+			openSqueezer.whenPressed(new SetSqueezer(Accum, false));
+			openSqueezer.whenReleased(new SetSqueezer(Accum, true));
 			
 		} catch(Exception ex) {
 			Logger.error("Failed to initialize Intake!", ex);
@@ -151,11 +151,11 @@ public class OI
 			
 			Climber = new Climber(ClimberMotor, shooter);
 			
-			JoystickButton launchShooter = new JoystickButton(IntakeJoystick, ButtonMap.Operator.LAUNCH_SHOOTER);
+			JoystickButton launchShooter = new JoystickButton(IntakeJoystick, ButtonMap.Operator.Climber.LAUNCH_SHOOTER);
 			launchShooter.whenPressed(new LaunchClimber(Climber));
 			
 			
-			JoystickButton startClimber = new JoystickButton(IntakeJoystick, ButtonMap.Operator.START_CLIMBER);
+			JoystickButton startClimber = new JoystickButton(IntakeJoystick, ButtonMap.Operator.Climber.START_CLIMBER);
 			startClimber.whenPressed(new WinchClimber(Climber));
 			startClimber.whenReleased(new StopSubsystem(Climber));
 			

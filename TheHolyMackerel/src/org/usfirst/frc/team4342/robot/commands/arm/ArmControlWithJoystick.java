@@ -8,11 +8,12 @@ import org.usfirst.frc.team4342.robot.subsystems.Arm;
 public class ArmControlWithJoystick extends CommandBase
 {
 	private Arm arm;
-	private OI io = OI.getInstance();
+	private OI oi = OI.getInstance();
 	private static final double DEADBAND = 0.1;
 	
 	public ArmControlWithJoystick(Arm arm)
 	{
+		this.requires(arm);
 		this.arm = arm;
 	}
 	
@@ -24,22 +25,15 @@ public class ArmControlWithJoystick extends CommandBase
 
 	@Override
 	protected void execute() {
-		double output = io.ArmJoystick.getY();
+		double output = oi.ArmJoystick.getY();
 		
 		if(Math.abs(output) > DEADBAND) 
 		{
-			if(output < 0 && !arm.isFullyForward()) 
-			{
-				arm.set(output);
-			} 
-			else if (output > 0 && !arm.isFullyBack())
-			{
-				arm.set(output);
-			}
-			else
-			{
-				arm.set(0);
-			}
+			arm.set(output);
+		} 
+		else 
+		{
+			arm.stop();
 		}
 	}
 
@@ -51,8 +45,7 @@ public class ArmControlWithJoystick extends CommandBase
 
 	@Override
 	protected void end() {
-		// TODO Auto-generated method stub
-		
+		arm.stop();
 	}
 
 }

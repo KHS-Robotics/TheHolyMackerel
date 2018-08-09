@@ -75,8 +75,9 @@ public class TankDrive extends DriveTrainBase
 
 	@Override
 	public void goStraight(double direction, double yaw) {
-		// TODO Auto-generated method stub
-		
+		this.setHeading(yaw);
+		this.direction = direction;
+		enablePID();
 	}
 
 	@Override
