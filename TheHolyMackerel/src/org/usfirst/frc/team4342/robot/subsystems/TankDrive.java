@@ -61,6 +61,7 @@ public class TankDrive extends DriveTrainBase
 
 	@Override
 	public void stop() {
+		this.disablePID();
 		driveR.set(0);
 		driveL.set(0);
 	}

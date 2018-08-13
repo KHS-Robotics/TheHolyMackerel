@@ -14,7 +14,6 @@ import org.usfirst.frc.team4342.robot.auton.Priority;
 import org.usfirst.frc.team4342.robot.auton.StartPosition;
 import org.usfirst.frc.team4342.robot.logging.DemonDashboard;
 import org.usfirst.frc.team4342.robot.logging.Logger;
-import org.usfirst.frc.team4342.robot.logging.PDPLogger;
 
 /**
  * Main Robot Class
@@ -34,7 +33,6 @@ public class Robot extends TimedRobot {
 		
 		OI.getInstance();
 		DemonDashboard.start();
-		PDPLogger.start();
 		
 		Logger.info("Initializing autonomous choosers...");
 		startPositionChooser = new SendableChooser<StartPosition>();
@@ -78,6 +76,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
+		OI.getInstance().Drive.setPID(SmartDashboard.getNumber("D-P" , 0.0), SmartDashboard.getNumber("D-I" , 0.0), SmartDashboard.getNumber("D-D" , 0.0));
 		Scheduler.getInstance().run();
 	}
 	

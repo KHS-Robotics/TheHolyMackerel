@@ -3,6 +3,7 @@ package org.usfirst.frc.team4342.robot;
 import org.usfirst.frc.team4342.robot.commands.StopSubsystem;
 import org.usfirst.frc.team4342.robot.commands.climber.LaunchClimber;
 import org.usfirst.frc.team4342.robot.commands.climber.WinchClimber;
+import org.usfirst.frc.team4342.robot.commands.drive.DriveGoToAngle;
 import org.usfirst.frc.team4342.robot.commands.intake.SetSqueezer;
 import org.usfirst.frc.team4342.robot.commands.intake.StartIntake;
 import org.usfirst.frc.team4342.robot.commands.intake.StartRelease;
@@ -17,23 +18,17 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 public class OI
 {
 	private static OI instance;
-	public final PowerDistributionPanel PDP;
 	
 	private OI() {
-		PDP = new PowerDistributionPanel();
-		LiveWindow.disableTelemetry(PDP);
-		
 		initDrive();
 		initIntake();
 		initArm();
@@ -63,7 +58,7 @@ public class OI
 	private Encoder RightDriveEncoder;
 	private Encoder ArmEncoder;
 	
-	private Victor IntakeMotor;
+	private Spark IntakeMotor;
 	private Victor ArmMotor;
 	private Victor ClimberMotor;
 	
@@ -99,6 +94,10 @@ public class OI
 			
 			Drive = new TankDrive(RightDriveMotor, LeftDriveMotor,  NavX, RightDriveEncoder, LeftDriveEncoder);
 			
+			// for testing
+			JoystickButton goToZero = new JoystickButton(LeftJoystick, 8);
+			goToZero.whenPressed(new DriveGoToAngle(Drive, 0));
+			
 		} catch(Exception ex) {
 			Logger.error("Failed to initialize Drive!", ex);
 		}
@@ -125,7 +124,7 @@ public class OI
 			Logger.info("Initializing Intake...");
 			
 			// Intake
-			IntakeMotor = new Victor(RobotMap.INTAKE);
+			IntakeMotor = new Spark(RobotMap.INTAKE);
 			squeezer = new DoubleSolenoid(RobotMap.SQUEEZER_A, RobotMap.SQUEEZER_B);
 			Accum = new Intake(IntakeMotor, squeezer);
 

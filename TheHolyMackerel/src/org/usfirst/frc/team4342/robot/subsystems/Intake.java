@@ -4,18 +4,18 @@ import org.usfirst.frc.team4342.robot.OI;
 import org.usfirst.frc.team4342.robot.commands.intake.IntakeWithJoystick;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.Spark;
 
 public class Intake extends SubsystemBase 
 {
-	private Victor motor;
+	private Spark motor;
 	private DoubleSolenoid squeezer;
 	
 	private boolean intaking, releasing;
 	
-	public Intake(Victor motor, DoubleSolenoid squeezer)
+	public Intake(Spark intakeMotor, DoubleSolenoid squeezer)
 	{
-		this.motor = motor;
+		this.motor = intakeMotor;
 		this.squeezer = squeezer;
 	}
 	
@@ -52,11 +52,11 @@ public class Intake extends SubsystemBase
 		if(isSqueezing() == squeezing)
 			return;
 		
-		squeezer.set(squeezing ? DoubleSolenoid.Value.kReverse : DoubleSolenoid.Value.kOff);
+		squeezer.set(squeezing ? DoubleSolenoid.Value.kForward : DoubleSolenoid.Value.kOff);
 	}
 	
 	public boolean isSqueezing() {
-		return squeezer.get() == DoubleSolenoid.Value.kReverse;
+		return squeezer.get() == DoubleSolenoid.Value.kForward;
 	}
 	
 	@Override

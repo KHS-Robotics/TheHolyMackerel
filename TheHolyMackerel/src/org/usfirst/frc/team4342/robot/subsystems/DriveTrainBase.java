@@ -1,5 +1,7 @@
 package org.usfirst.frc.team4342.robot.subsystems;
 
+import org.usfirst.frc.team4342.robot.Constants;
+
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.PIDController;
@@ -14,7 +16,7 @@ public abstract class DriveTrainBase extends SubsystemBase implements PIDSource,
     private final PIDController yawPID;
 
     private double offset;
-    private PIDSourceType pidSourceType;
+    private PIDSourceType pidSourceType = PIDSourceType.kDisplacement;
 
     private final AHRS navx;
     
@@ -25,7 +27,7 @@ public abstract class DriveTrainBase extends SubsystemBase implements PIDSource,
     public DriveTrainBase(AHRS navx) {
         this.navx = navx;
 
-        yawPID = new PIDController(0, 0, 0, this, this);
+        yawPID = new PIDController(Constants.DrivePID.P, Constants.DrivePID.I, Constants.DrivePID.D, this, this);
         yawPID.setInputRange(-180.0, 180.0);
 		yawPID.setOutputRange(-1.0, 1.0);
 		yawPID.setContinuous();
