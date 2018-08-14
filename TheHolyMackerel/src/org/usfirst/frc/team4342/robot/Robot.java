@@ -50,10 +50,6 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("E-I" , 0.0);
 		SmartDashboard.putNumber("E-D" , 0.0);
 		
-		SmartDashboard.putNumber("D-P" , 0.0);
-		SmartDashboard.putNumber("D-I" , 0.0);
-		SmartDashboard.putNumber("D-D" , 0.0);
-		
 		Logger.info("Starting USB Camera on dev0...");
 		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture(0);
 		camera.setFPS(20);
@@ -76,7 +72,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		OI.getInstance().Drive.setPID(SmartDashboard.getNumber("D-P" , 0.0), SmartDashboard.getNumber("D-I" , 0.0), SmartDashboard.getNumber("D-D" , 0.0));
+		OI.getInstance().Arm.getPIDController().setPID(SmartDashboard.getNumber("E-P" , 0.0), SmartDashboard.getNumber("E-I" , 0.0), SmartDashboard.getNumber("E-D" , 0.0));
 		Scheduler.getInstance().run();
 	}
 	
@@ -134,27 +130,6 @@ public class Robot extends TimedRobot {
 		Logger.info("Entering disabled...");
 		stopAutonomousRoutine();
 		Scheduler.getInstance().run();
-	}
-	
-	private int temp;
-	@Override
-	public void disabledPeriodic() {
-		// Temporary for tuning PID values
-//		if(temp % 50 == 0) {
-//			double EP = SmartDashboard.getNumber("E-P", 0.0);
-//			double EI = SmartDashboard.getNumber("E-I", 0.0);
-//			double ED = SmartDashboard.getNumber("E-D", 0.0);
-//			OI.getInstance().Elevator.setPID(EP, EI, ED);
-//			
-//			double DP = SmartDashboard.getNumber("D-P", 0.0);
-//			double DI = SmartDashboard.getNumber("D-I", 0.0);
-//			double DD = SmartDashboard.getNumber("D-D", 0.0);
-//			OI.getInstance().Drive.setPID(DP, DI, DD);
-//
-//			temp = 0;
-//		}
-//
-//		temp++;
 	}
 	
 	/**

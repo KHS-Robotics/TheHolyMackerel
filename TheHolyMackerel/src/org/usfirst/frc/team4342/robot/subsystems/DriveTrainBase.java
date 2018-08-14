@@ -31,7 +31,7 @@ public abstract class DriveTrainBase extends SubsystemBase implements PIDSource,
         yawPID.setInputRange(-180.0, 180.0);
 		yawPID.setOutputRange(-1.0, 1.0);
 		yawPID.setContinuous();
-		yawPID.setAbsoluteTolerance(2);
+		yawPID.setAbsoluteTolerance(0.25);
     }
 
     /**

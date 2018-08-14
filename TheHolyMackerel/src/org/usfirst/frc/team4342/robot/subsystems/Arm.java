@@ -18,7 +18,7 @@ public class Arm extends PIDSubsystem {
 	public Arm(Victor motor, Encoder encoder, DigitalInput frontLS, DigitalInput rearLS) {
 		super(Constants.ArmPID.P, Constants.ArmPID.I, Constants.ArmPID.D);
 		setInputRange(-120, 120);
-		setOutputRange(-0.5, 0.5);
+		setOutputRange(-0.75, 0.75);
 		setAbsoluteTolerance(10);
 		disable();
 		

@@ -29,7 +29,7 @@ public class ArmControlWithJoystick extends CommandBase
 		
 		if(Math.abs(output) > DEADBAND) 
 		{
-			arm.set(output / 2);	//change speed LEO WAS CHANGING THIS NUMBER
+			arm.set(output / 1.5);
 		} 
 		else 
 		{

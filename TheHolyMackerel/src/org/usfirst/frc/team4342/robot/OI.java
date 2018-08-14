@@ -1,6 +1,7 @@
 package org.usfirst.frc.team4342.robot;
 
 import org.usfirst.frc.team4342.robot.commands.StopSubsystem;
+import org.usfirst.frc.team4342.robot.commands.arm.PointToSwitchFront;
 import org.usfirst.frc.team4342.robot.commands.climber.LaunchClimber;
 import org.usfirst.frc.team4342.robot.commands.climber.WinchClimber;
 import org.usfirst.frc.team4342.robot.commands.drive.DriveGoToAngle;
@@ -94,10 +95,6 @@ public class OI
 			
 			Drive = new TankDrive(RightDriveMotor, LeftDriveMotor,  NavX, RightDriveEncoder, LeftDriveEncoder);
 			
-			// for testing
-			JoystickButton goToZero = new JoystickButton(LeftJoystick, 8);
-			goToZero.whenPressed(new DriveGoToAngle(Drive, 0));
-			
 		} catch(Exception ex) {
 			Logger.error("Failed to initialize Drive!", ex);
 		}
@@ -113,6 +110,9 @@ public class OI
 			limitBack = new DigitalInput(RobotMap.REAR_LS);
 			
 			Arm = new Arm(ArmMotor, ArmEncoder, limitFront, limitBack);
+			
+			JoystickButton goToSwitchFront = new JoystickButton(LeftJoystick, 8);
+			goToSwitchFront.whenPressed(new PointToSwitchFront(Arm));
 			
 		} catch(Exception ex) {
 			Logger.error("Failed to initialize Arm!", ex);

@@ -52,7 +52,7 @@ public class Intake extends SubsystemBase
 		if(isSqueezing() == squeezing)
 			return;
 		
-		squeezer.set(squeezing ? DoubleSolenoid.Value.kForward : DoubleSolenoid.Value.kOff);
+		squeezer.set(squeezing ? DoubleSolenoid.Value.kForward : DoubleSolenoid.Value.kReverse);
 	}
 	
 	public boolean isSqueezing() {
