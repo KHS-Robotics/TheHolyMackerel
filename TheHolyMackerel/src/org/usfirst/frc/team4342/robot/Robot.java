@@ -46,9 +46,9 @@ public class Robot extends TimedRobot {
 		priorityChooser.addObject("Switch", Priority.SWITCH);
 		SmartDashboard.putData("Priority Chooser", priorityChooser);
 		
-		SmartDashboard.putNumber("E-P" , 0.0);
-		SmartDashboard.putNumber("E-I" , 0.0);
-		SmartDashboard.putNumber("E-D" , 0.0);
+//		SmartDashboard.putNumber("E-P" , 0.0);
+//		SmartDashboard.putNumber("E-I" , 0.0);
+//		SmartDashboard.putNumber("E-D" , 0.0);
 		
 		Logger.info("Starting USB Camera on dev0...");
 		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture(0);
@@ -72,7 +72,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		OI.getInstance().Arm.getPIDController().setPID(SmartDashboard.getNumber("E-P" , 0.0), SmartDashboard.getNumber("E-I" , 0.0), SmartDashboard.getNumber("E-D" , 0.0));
+		//OI.getInstance().Arm.getPIDController().setPID(SmartDashboard.getNumber("E-P" , 0.0), SmartDashboard.getNumber("E-I" , 0.0), SmartDashboard.getNumber("E-D" , 0.0));
 		Scheduler.getInstance().run();
 	}
 	

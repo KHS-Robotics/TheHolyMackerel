@@ -22,8 +22,7 @@ public class Intake extends SubsystemBase
 	@Override
 	protected void initDefaultCommand()
 	{
-		OI oi = OI.getInstance();
-		this.setDefaultCommand(new IntakeWithJoystick(oi.Accum, oi.IntakeJoystick));
+		super.initDefaultCommand();
 	}
 	
 	public void enable() {

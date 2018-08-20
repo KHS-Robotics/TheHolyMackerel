@@ -3,7 +3,9 @@ package org.usfirst.frc.team4342.robot.commands.drive;
 import org.usfirst.frc.team4342.robot.commands.CommandBase;
 import org.usfirst.frc.team4342.robot.subsystems.TankDrive;
 
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
 
 /**
  * Command to use the tank drive with two joysticks
@@ -16,22 +18,18 @@ public class DriveTankWithJoysticks extends CommandBase {
 
 	private boolean idle;
 	
-	private Joystick leftJoystick, rightJoystick;
+	private XboxController controller;
 	private TankDrive drive;
 	
-	/**
-	 * Command to use the tank drive with two joysticks
-	 * @param leftJoystick the left stick to control the left side of the drive train
-	 * @param rightJoystick the right stick to control the right side of the drive train
+	/*
 	 * @param drive the <code>TankDrive</code> subsystem to output to
 	 * @see org.usfirst.frc.team4342.robot.subsystems.TankDrive
 	 */
-	public DriveTankWithJoysticks(Joystick leftJoystick, Joystick rightJoystick, TankDrive drive)
+	public DriveTankWithJoysticks(XboxController controller, TankDrive drive)
 	{
 		this.requires(drive);
 		
-		this.leftJoystick = leftJoystick;
-		this.rightJoystick = rightJoystick;
+		this.controller = controller;
 		this.drive = drive;
 	}
 	
@@ -41,12 +39,17 @@ public class DriveTankWithJoysticks extends CommandBase {
 	@Override
 	protected void execute()
 	{
-		final double LEFT_Y = -leftJoystick.getY();
-		final double RIGHT_Y = -rightJoystick.getY();
+		final double LEFT_TRIGGER = -controller.getTriggerAxis(Hand.kLeft);
+		final double RIGHT_TRIGGER = controller.getTriggerAxis(Hand.kRight);
+		final double X_INPUT = controller.getX(Hand.kLeft);
+		final double Y_INPUT = LEFT_TRIGGER + RIGHT_TRIGGER;
+		
+		double left = Y_INPUT + X_INPUT;
+		double right = Y_INPUT - X_INPUT;
 
-		if(Math.abs(LEFT_Y) > JOYSTICK_DEADZONE || Math.abs(RIGHT_Y) > JOYSTICK_DEADZONE)
+		if(Math.abs(left) > JOYSTICK_DEADZONE || Math.abs(right) > JOYSTICK_DEADZONE)
 		{	
-			drive.set(adjust(LEFT_Y), adjust(RIGHT_Y));
+			drive.set(adjust(left), adjust(right));
 			idle = false;
 		} 
 		else if(!idle)

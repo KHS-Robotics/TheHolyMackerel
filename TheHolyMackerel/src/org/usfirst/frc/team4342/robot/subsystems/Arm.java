@@ -17,9 +17,9 @@ public class Arm extends PIDSubsystem {
 	
 	public Arm(Victor motor, Encoder encoder, DigitalInput frontLS, DigitalInput rearLS) {
 		super(Constants.ArmPID.P, Constants.ArmPID.I, Constants.ArmPID.D);
-		setInputRange(-120, 120);
+		setInputRange(-130, 130);
 		setOutputRange(-0.75, 0.75);
-		setAbsoluteTolerance(10);
+		setAbsoluteTolerance(0.25);
 		disable();
 		
 		this.motor = motor;
@@ -82,11 +82,11 @@ public class Arm extends PIDSubsystem {
 	
 	public void set(double output) {
 		if (output > 0 && isFullyForward()) {
-			output = 0.1;
+			output = output > 0.1 ? 0.1 : output;
 		}
 		
 		if (output < 0 && isFullyBack()) {
-			output = -0.1;
+			output = output < -0.1 ? -0.1 : output;
 		}
 		
 		motor.set(output);

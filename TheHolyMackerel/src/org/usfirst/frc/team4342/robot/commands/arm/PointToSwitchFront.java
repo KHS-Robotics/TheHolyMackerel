@@ -7,7 +7,7 @@ import org.usfirst.frc.team4342.robot.subsystems.Arm;
  * the opponent has ownership
  */
 public class PointToSwitchFront extends MoveArmToSetpoint {
-	private static final double SWITCH_HEIGHT = 0;
+	private static final double SWITCH_HEIGHT = 60;
 
 	/**
 	 * Sets the height of the elevator to place a cube on the scale when

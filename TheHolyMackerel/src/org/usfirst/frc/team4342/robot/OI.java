@@ -23,6 +23,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class OI
@@ -77,10 +78,8 @@ public class OI
 	public Climber Climber;
 	
 	// Joysticks
-	public final Joystick LeftJoystick = new Joystick(RobotMap.LEFT_DRIVE_JOYSTICK);
-	public final Joystick RightJoystick = new Joystick(RobotMap.RIGHT_DRIVE_JOYSTICK);
-	public final Joystick ArmJoystick = new Joystick(RobotMap.ARM_JOYSTICK);
-	public final Joystick IntakeJoystick = new Joystick(RobotMap.INTAKE_JOYSTICK);
+	public final XboxController DriverController = new XboxController(RobotMap.XBOX_CONTROLLER);
+	public final Joystick OperatorJoystick = new Joystick(RobotMap.OPERATOR_JOYSTICK);
 	
 	private void initDrive() {
 		try {
@@ -111,8 +110,9 @@ public class OI
 			
 			Arm = new Arm(ArmMotor, ArmEncoder, limitFront, limitBack);
 			
-			JoystickButton goToSwitchFront = new JoystickButton(LeftJoystick, 8);
-			goToSwitchFront.whenPressed(new PointToSwitchFront(Arm));
+			// for testing
+//			JoystickButton goToSwitchFront = new JoystickButton(OperatorJoystick, 9);
+//			goToSwitchFront.whenPressed(new PointToSwitchFront(Arm));
 			
 		} catch(Exception ex) {
 			Logger.error("Failed to initialize Arm!", ex);
@@ -129,16 +129,16 @@ public class OI
 			Accum = new Intake(IntakeMotor, squeezer);
 
 			// Switch to enable the intake for a cube
-			JoystickButton intakeSwitch = new JoystickButton(IntakeJoystick, ButtonMap.Operator.Intake.INTAKE);
+			JoystickButton intakeSwitch = new JoystickButton(OperatorJoystick, ButtonMap.Operator.Intake.INTAKE);
 			intakeSwitch.whenPressed(new StartIntake(Accum));
 			intakeSwitch.whenReleased(new StopSubsystem(Accum));
 						
 			// Switch to enable reverse intake to release a cube
-			JoystickButton releaseSwitch = new JoystickButton(IntakeJoystick, ButtonMap.Operator.Intake.RELEASE);
+			JoystickButton releaseSwitch = new JoystickButton(OperatorJoystick, ButtonMap.Operator.Intake.RELEASE);
 			releaseSwitch.whenPressed(new StartRelease(Accum));
 			releaseSwitch.whenReleased(new StopSubsystem(Accum));
 			
-			JoystickButton openSqueezer = new JoystickButton(IntakeJoystick, ButtonMap.Operator.Intake.SQUEEZE);
+			JoystickButton openSqueezer = new JoystickButton(OperatorJoystick, ButtonMap.Operator.Intake.SQUEEZE);
 			openSqueezer.whenPressed(new SetSqueezer(Accum, false));
 			openSqueezer.whenReleased(new SetSqueezer(Accum, true));
 			
@@ -156,11 +156,11 @@ public class OI
 			
 			Climber = new Climber(ClimberMotor, shooter);
 			
-			JoystickButton launchShooter = new JoystickButton(IntakeJoystick, ButtonMap.Operator.Climber.LAUNCH_SHOOTER);
+			JoystickButton launchShooter = new JoystickButton(OperatorJoystick, ButtonMap.Operator.Climber.LAUNCH_SHOOTER);
 			launchShooter.whenPressed(new LaunchClimber(Climber));
 			
 			
-			JoystickButton startClimber = new JoystickButton(IntakeJoystick, ButtonMap.Operator.Climber.START_CLIMBER);
+			JoystickButton startClimber = new JoystickButton(OperatorJoystick, ButtonMap.Operator.Climber.START_CLIMBER);
 			startClimber.whenPressed(new WinchClimber(Climber));
 			startClimber.whenReleased(new StopSubsystem(Climber));
 			

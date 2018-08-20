@@ -4,10 +4,8 @@ import edu.wpi.first.wpilibj.I2C.Port;
 
 public class RobotMap {
 	// Joysticks
-	public static final int LEFT_DRIVE_JOYSTICK = 0;
-	public static final int RIGHT_DRIVE_JOYSTICK = 1;
-	public static final int ARM_JOYSTICK = 2;
-	public static final int INTAKE_JOYSTICK = 3;
+	public static final int XBOX_CONTROLLER = 0;
+	public static final int OPERATOR_JOYSTICK = 1;
 	
 	// NavX
 	public static final Port NAVX_PORT = Port.kMXP;

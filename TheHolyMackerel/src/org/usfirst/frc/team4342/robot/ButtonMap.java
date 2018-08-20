@@ -33,14 +33,14 @@ public class ButtonMap
 		}
 		
 		public static class Intake {
-			public static final int INTAKE = 5;
+			public static final int INTAKE = 3;
 			public static final int SQUEEZE = 1;
-			public static final int RELEASE = 6;
+			public static final int RELEASE = 4;
 		}
 		
 		public static class Climber {
-			public static final int LAUNCH_SHOOTER = 4;
-			public static final int START_CLIMBER = 3;
+			public static final int LAUNCH_SHOOTER = 12;
+			public static final int START_CLIMBER = 11;
 		}
 		
 		

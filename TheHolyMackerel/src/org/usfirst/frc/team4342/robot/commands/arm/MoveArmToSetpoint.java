@@ -16,7 +16,7 @@ public class MoveArmToSetpoint extends CommandBase {
 	 * @param height the desired height of the elevator
 	 */
 	public MoveArmToSetpoint(Arm arm, double rot) {
-		super(5);
+		super(2.5);
 		
 		this.arm = arm;
 		this.rot = rot;
