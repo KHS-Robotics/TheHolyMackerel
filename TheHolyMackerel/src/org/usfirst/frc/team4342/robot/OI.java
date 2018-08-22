@@ -94,6 +94,18 @@ public class OI
 			
 			Drive = new TankDrive(RightDriveMotor, LeftDriveMotor,  NavX, RightDriveEncoder, LeftDriveEncoder);
 			
+			JoystickButton driveGoToZero = new JoystickButton(DriverController, ButtonMap.Driver.GO_TO_ZERO);
+			driveGoToZero.whenPressed(new DriveGoToAngle(Drive, 0));
+			
+			JoystickButton driveGoToLeft = new JoystickButton(DriverController, ButtonMap.Driver.GO_TO_LEFT);
+			driveGoToLeft.whenPressed(new DriveGoToAngle(Drive, -90));
+			
+			JoystickButton driveGoToRight = new JoystickButton(DriverController, ButtonMap.Driver.GO_TO_RIGHT);
+			driveGoToRight.whenPressed(new DriveGoToAngle(Drive, 90));
+			
+			JoystickButton driveGoTo180 = new JoystickButton(DriverController, ButtonMap.Driver.GO_180);
+			driveGoTo180.whenPressed(new DriveGoToAngle(Drive, 180));
+			
 		} catch(Exception ex) {
 			Logger.error("Failed to initialize Drive!", ex);
 		}

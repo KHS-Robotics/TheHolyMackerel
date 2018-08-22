@@ -1,5 +1,6 @@
 package org.usfirst.frc.team4342.robot.subsystems;
 
+import org.usfirst.frc.team4342.robot.ButtonMap;
 import org.usfirst.frc.team4342.robot.Constants;
 import org.usfirst.frc.team4342.robot.OI;
 import org.usfirst.frc.team4342.robot.commands.arm.ArmControlWithJoystick;
@@ -7,6 +8,7 @@ import org.usfirst.frc.team4342.robot.commands.arm.ArmControlWithJoystick;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 
@@ -14,6 +16,7 @@ public class Arm extends PIDSubsystem {
 	private Victor motor;
 	private Encoder encoder;
 	private DigitalInput frontLS, rearLS;
+	private boolean override;
 	
 	public Arm(Victor motor, Encoder encoder, DigitalInput frontLS, DigitalInput rearLS) {
 		super(Constants.ArmPID.P, Constants.ArmPID.I, Constants.ArmPID.D);
@@ -37,6 +40,11 @@ public class Arm extends PIDSubsystem {
 		// DO NOT TOUCH ME
 	}
 
+	public void setOverride(boolean flag)
+	{
+		override = flag;
+	}
+	
 	/**
 	 * {@inheritDoc}
 	 */
@@ -69,7 +77,7 @@ public class Arm extends PIDSubsystem {
 	@Override
 	protected void initDefaultCommand() {
 		OI oi = OI.getInstance();
-		this.setDefaultCommand(new ArmControlWithJoystick(oi.Arm));
+		this.setDefaultCommand(new ArmControlWithJoystick(oi.Arm, new JoystickButton(oi.OperatorJoystick, ButtonMap.Operator.OVERRIDE)));
 	}
 	
 	public boolean isFullyForward() {
@@ -81,12 +89,15 @@ public class Arm extends PIDSubsystem {
 	}
 	
 	public void set(double output) {
-		if (output > 0 && isFullyForward()) {
-			output = output > 0.1 ? 0.1 : output;
-		}
+	
+		if(!override) {
+			if (output > 0 && isFullyForward()) {
+				output = output > 0.1 ? 0.1 : output;
+			}
 		
-		if (output < 0 && isFullyBack()) {
-			output = output < -0.1 ? -0.1 : output;
+			if (output < 0 && isFullyBack()) {
+				output = output < -0.1 ? -0.1 : output;
+			}
 		}
 		
 		motor.set(output);

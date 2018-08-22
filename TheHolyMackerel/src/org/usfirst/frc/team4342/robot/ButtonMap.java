@@ -9,19 +9,13 @@ public class ButtonMap
 	/**
 	 * Drive Sticks to control the Tank Drive
 	 */
-	public static class DriveStick
+	public static class Driver
 	{
-		/**
-		 * Right Drive Stick
-		 */
-		public static class Right
-		{
-			public static final int GO_STRAIGHT = 1;
-			public static final int GO_TO_ZERO = 3;
-			public static final int GO_TO_LEFT = 4;
-			public static final int GO_TO_RIGHT = 5;
-			public static final int GO_180 = 2;
-		}
+		//	public static final int GO_STRAIGHT = XboxButton.;
+			public static final int GO_TO_ZERO = XboxButton.kY.value;
+			public static final int GO_TO_LEFT = XboxButton.kX.value;
+			public static final int GO_TO_RIGHT = XboxButton.kB.value;
+			public static final int GO_180 = XboxButton.kA.value;
 	}
 	
 
@@ -45,6 +39,29 @@ public class ButtonMap
 		
 		
 		public static final int RESET = 10;
-		public static final int OVERIDE = 9;
+		public static final int OVERRIDE = 2;
+	}
+	
+
+	/**
+	 * Represents a digital button on an XboxController
+	 */
+	 enum XboxButton {
+		kBumperLeft(5),
+		kBumperRight(6),
+		kStickLeft(9),
+		kStickRight(10),
+		kA(1),
+		kB(2),
+		kX(3),
+		kY(4),
+		kBack(7),
+		kStart(8);
+
+		private int value;
+
+		XboxButton(int value) {
+			this.value = value;
+		}
 	}
 }
