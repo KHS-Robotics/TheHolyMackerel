@@ -22,7 +22,6 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Spark;
-import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
@@ -61,8 +60,8 @@ public class OI
 	private Encoder ArmEncoder;
 	
 	private Spark IntakeMotor;
-	private Victor ArmMotor;
-	private Victor ClimberMotor;
+	private Spark ArmMotor;
+	private Spark ClimberMotor;
 	
 	private DoubleSolenoid squeezer;
 	private Solenoid shooter, rgbPower, red, blue, green;
@@ -115,7 +114,7 @@ public class OI
 		try {
 			Logger.info("Initializing Arm...");
 			
-			ArmMotor = new Victor(RobotMap.ARM);
+			ArmMotor = new Spark(RobotMap.ARM);
 			ArmEncoder = new Encoder(RobotMap.ARM_ENC_A, RobotMap.ARM_ENC_B);
 			limitFront = new DigitalInput(RobotMap.FRONT_LS);
 			limitBack = new DigitalInput(RobotMap.REAR_LS);
@@ -163,7 +162,7 @@ public class OI
 		try {
 			Logger.info("Initializing Climber...");
 			
-			ClimberMotor = new Victor(RobotMap.CLIMBER);
+			ClimberMotor = new Spark(RobotMap.CLIMBER);
 			shooter = new Solenoid(RobotMap.SHOOTER);
 			
 			Climber = new Climber(ClimberMotor, shooter);

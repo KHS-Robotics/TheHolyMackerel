@@ -7,18 +7,20 @@ import org.usfirst.frc.team4342.robot.commands.arm.ArmControlWithJoystick;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 
 public class Arm extends PIDSubsystem {
-	private Victor motor;
+	private double divider = 1.0;
+	
+	private Spark motor;
 	private Encoder encoder;
 	private DigitalInput frontLS, rearLS;
 	private boolean override;
 	
-	public Arm(Victor motor, Encoder encoder, DigitalInput frontLS, DigitalInput rearLS) {
+	public Arm(Spark motor, Encoder encoder, DigitalInput frontLS, DigitalInput rearLS) {
 		super(Constants.ArmPID.P, Constants.ArmPID.I, Constants.ArmPID.D);
 		setInputRange(-130, 130);
 		setOutputRange(-0.75, 0.75);
@@ -29,6 +31,11 @@ public class Arm extends PIDSubsystem {
 		this.encoder = encoder;
 		this.frontLS = frontLS;
 		this.rearLS = rearLS;
+	}
+	
+	public void setDivider(double divider)
+	{
+		this.divider = divider;
 	}
 	
 	/**
@@ -100,7 +107,7 @@ public class Arm extends PIDSubsystem {
 			}
 		}
 		
-		motor.set(output);
+		motor.set(output / divider);
 	}
 
 	public void stop() {

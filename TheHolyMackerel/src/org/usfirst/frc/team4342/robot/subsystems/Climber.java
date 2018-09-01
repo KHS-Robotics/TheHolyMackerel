@@ -1,13 +1,13 @@
 package org.usfirst.frc.team4342.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.Spark;
 
 public class Climber extends SubsystemBase{
-	private Victor motor;
+	private Spark motor;
 	private Solenoid shooter;
 	
-	public Climber(Victor motor, Solenoid shooter)
+	public Climber(Spark motor, Solenoid shooter)
 	{
 		this.motor = motor;
 		this.shooter = shooter;

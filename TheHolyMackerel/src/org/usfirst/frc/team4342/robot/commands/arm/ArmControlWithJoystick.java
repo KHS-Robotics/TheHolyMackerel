@@ -24,6 +24,8 @@ private static final double DEADBAND = 0.03;
 
 	@Override
 	protected void initialize() {
+		arm.setDivider(1.5);
+		
 		if(!arm.isFullyBack() && !arm.isFullyForward()) {
 			arm.setSetpoint(arm.getPosition());
 			arm.enable();
@@ -63,6 +65,7 @@ private static final double DEADBAND = 0.03;
 	@Override
 	protected void end() {
 		arm.stop();
+		arm.setDivider(1);
 	}
 	
 	private static boolean checkJoystickDeadband(double a) {
