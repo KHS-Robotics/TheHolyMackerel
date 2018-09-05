@@ -23,7 +23,7 @@ public class Arm extends PIDSubsystem {
 	public Arm(Spark motor, Encoder encoder, DigitalInput frontLS, DigitalInput rearLS) {
 		super(Constants.ArmPID.P, Constants.ArmPID.I, Constants.ArmPID.D);
 		setInputRange(-130, 130);
-		setOutputRange(-0.75, 0.75);
+		setOutputRange(-1, 1);
 		setAbsoluteTolerance(0.25);
 		disable();
 		

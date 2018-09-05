@@ -8,6 +8,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team4342.robot.auton.AutoBaseline;
+import org.usfirst.frc.team4342.robot.auton.AutoSwitch;
+import org.usfirst.frc.team4342.robot.auton.AutoTwoCubeSwitch;
 //import org.usfirst.frc.team4342.robot.auton.AutoSwitch;
 import org.usfirst.frc.team4342.robot.auton.AutonomousRoutine;
 import org.usfirst.frc.team4342.robot.auton.Priority;
@@ -44,11 +46,8 @@ public class Robot extends TimedRobot {
 		priorityChooser = new SendableChooser<Priority>();
 		priorityChooser.addDefault("Baseline", Priority.BASELINE);
 		priorityChooser.addObject("Switch", Priority.SWITCH);
+		priorityChooser.addObject("2-Cube Switch", Priority.TWO_CUBE_SWITCH);
 		SmartDashboard.putData("Priority Chooser", priorityChooser);
-		
-//		SmartDashboard.putNumber("E-P" , 0.0);
-//		SmartDashboard.putNumber("E-I" , 0.0);
-//		SmartDashboard.putNumber("E-D" , 0.0);
 		
 		Logger.info("Starting USB Camera on dev0...");
 		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture(0);
@@ -72,7 +71,6 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		//OI.getInstance().Arm.getPIDController().setPID(SmartDashboard.getNumber("E-P" , 0.0), SmartDashboard.getNumber("E-I" , 0.0), SmartDashboard.getNumber("E-D" , 0.0));
 		Scheduler.getInstance().run();
 	}
 	
@@ -97,9 +95,13 @@ public class Robot extends TimedRobot {
 			
 			case SWITCH:
 				routine = "AutoSwitch";
-				//autonomousRoutine = new AutoSwitch(position, oi.Drive, oi.Accum);
+				autonomousRoutine = new AutoSwitch(position, oi.Drive, oi.Accum, oi.Arm);
 			break;
 			
+			case TWO_CUBE_SWITCH:
+				routine = "AutoTwoCubeSwitch";
+				autonomousRoutine = new AutoTwoCubeSwitch(position, oi.Drive, oi.Accum, oi.Arm);
+			break;
 			
 			default:
 				routine = null;

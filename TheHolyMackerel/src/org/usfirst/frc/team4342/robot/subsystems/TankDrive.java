@@ -1,7 +1,7 @@
 package org.usfirst.frc.team4342.robot.subsystems;
 
 import org.usfirst.frc.team4342.robot.OI;
-import org.usfirst.frc.team4342.robot.commands.drive.DriveTankWithJoysticks;
+import org.usfirst.frc.team4342.robot.commands.drive.DriveTankWithXbox;
 
 import com.kauailabs.navx.frc.AHRS;
 
@@ -56,7 +56,7 @@ public class TankDrive extends DriveTrainBase
 	protected void initDefaultCommand()
 	{
 		OI oi = OI.getInstance();
-		this.setDefaultCommand(new DriveTankWithJoysticks(oi.DriverController, oi.Drive));
+		this.setDefaultCommand(new DriveTankWithXbox(oi.DriverController, oi.Drive));
 	}
 
 	@Override

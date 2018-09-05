@@ -16,9 +16,9 @@ public class ReleaseCube extends CommandBase
 	 * will enable the release for 2 seconds.
 	 * @param accum the accum
 	 */
-	public ReleaseCube(Intake accum)
+	public ReleaseCube(Intake accum, double timeout)
 	{
-		super(2);
+		super(timeout);
 		
 		this.accum = accum;
 		this.requires(accum);

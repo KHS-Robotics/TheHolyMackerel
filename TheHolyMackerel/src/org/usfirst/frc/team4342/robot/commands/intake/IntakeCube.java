@@ -7,7 +7,7 @@ import org.usfirst.frc.team4342.robot.subsystems.Intake;
  * Command to release a cube in autonomous. This command
  * will enable the release for 2 seconds.
  */
-public class GrabCube extends CommandBase 
+public class IntakeCube extends CommandBase 
 {
 	private Intake accum;
 	
@@ -16,9 +16,10 @@ public class GrabCube extends CommandBase
 	 * will enable the release for 2 seconds.
 	 * @param accum the accum
 	 */
-	public GrabCube(Intake accum)
+	public IntakeCube(Intake accum, double timeout)
 	{
-		super(2);
+		
+		super(timeout);
 		
 		this.accum = accum;
 		this.requires(accum);

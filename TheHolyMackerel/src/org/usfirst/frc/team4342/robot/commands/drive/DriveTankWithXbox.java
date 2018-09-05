@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.XboxController;
 /**
  * Command to use the tank drive with two joysticks
  */
-public class DriveTankWithJoysticks extends CommandBase {
+public class DriveTankWithXbox extends CommandBase {
 	private static final double JOYSTICK_DEADZONE = 0.05;
 	// [0,1], 0 for no sensitivity control (linear) and 
 	// 1 for full sensitivity control (cubic)
@@ -25,7 +25,7 @@ public class DriveTankWithJoysticks extends CommandBase {
 	 * @param drive the <code>TankDrive</code> subsystem to output to
 	 * @see org.usfirst.frc.team4342.robot.subsystems.TankDrive
 	 */
-	public DriveTankWithJoysticks(XboxController controller, TankDrive drive)
+	public DriveTankWithXbox(XboxController controller, TankDrive drive)
 	{
 		this.requires(drive);
 		

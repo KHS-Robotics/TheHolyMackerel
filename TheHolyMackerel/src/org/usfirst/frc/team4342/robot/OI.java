@@ -121,10 +121,6 @@ public class OI
 			
 			Arm = new Arm(ArmMotor, ArmEncoder, limitFront, limitBack);
 			
-			// for testing
-//			JoystickButton goToSwitchFront = new JoystickButton(OperatorJoystick, 9);
-//			goToSwitchFront.whenPressed(new PointToSwitchFront(Arm));
-			
 		} catch(Exception ex) {
 			Logger.error("Failed to initialize Arm!", ex);
 		}

@@ -9,7 +9,7 @@ public class Constants {
 	
 	public static class ArmPID {
 		public static final double P = 0.05;
-		public static final double I = 0.0;
-		public static final double D = 0.0;
+		public static final double I = 0.00001;
+		public static final double D = 0.04;
 	}
 }

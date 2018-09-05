@@ -24,12 +24,6 @@ private static final double DEADBAND = 0.03;
 
 	@Override
 	protected void initialize() {
-		arm.setDivider(1.5);
-		
-		if(!arm.isFullyBack() && !arm.isFullyForward()) {
-			arm.setSetpoint(arm.getPosition());
-			arm.enable();
-		}
 	}
 
 	@Override
@@ -54,18 +48,20 @@ private static final double DEADBAND = 0.03;
 			arm.setSetpoint(arm.getPosition()); // hold current height
 			arm.enable();
 			initializedIdle = true;
+			arm.setDivider(1);
 		} 
 		else if(!idle) {
 			arm.disable();
 			arm.set(INPUT);
 			initializedIdle = false;
+			arm.setDivider(1.5);
 		}
 	}
 
 	@Override
 	protected void end() {
-		arm.stop();
 		arm.setDivider(1);
+		arm.stop();
 	}
 	
 	private static boolean checkJoystickDeadband(double a) {
