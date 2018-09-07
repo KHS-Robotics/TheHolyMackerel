@@ -1,6 +1,7 @@
 package org.usfirst.frc.team4342.robot;
 
 import org.usfirst.frc.team4342.robot.commands.StopSubsystem;
+import org.usfirst.frc.team4342.robot.commands.arm.MoveArmToSetpoint;
 import org.usfirst.frc.team4342.robot.commands.arm.PointToSwitchFront;
 import org.usfirst.frc.team4342.robot.commands.climber.LaunchClimber;
 import org.usfirst.frc.team4342.robot.commands.climber.WinchClimber;
@@ -120,6 +121,9 @@ public class OI
 			limitBack = new DigitalInput(RobotMap.REAR_LS);
 			
 			Arm = new Arm(ArmMotor, ArmEncoder, limitFront, limitBack);
+			
+//			JoystickButton goToAngle = new JoystickButton(OperatorJoystick, 9);
+//			goToAngle.whenPressed(new MoveArmToSetpoint(Arm, 60));
 			
 		} catch(Exception ex) {
 			Logger.error("Failed to initialize Arm!", ex);

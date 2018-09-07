@@ -24,6 +24,10 @@ private static final double DEADBAND = 0.03;
 
 	@Override
 	protected void initialize() {
+		if(!arm.isFullyBack() && !arm.isFullyForward()) {
+			arm.setSetpoint(arm.getPosition()); // hold current height
+			arm.enable();
+		}
 	}
 
 	@Override
