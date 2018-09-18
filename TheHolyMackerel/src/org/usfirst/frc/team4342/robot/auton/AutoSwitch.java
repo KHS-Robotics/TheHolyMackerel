@@ -73,15 +73,27 @@ public class AutoSwitch extends AutonomousRoutine
 		}
 		else if(position == StartPosition.CENTER)
 		{
-			final boolean clockwise = this.isSwitchRight();
+			if(this.isSwitchRight())
+			{
 			
-			this.addSequential(new DriveStraight(drive, 0.5, CENTER_STRAIGHT_DISTANCE));
-			this.addSequential(new DriveGoToAngle(drive, 90));
+			this.addSequential(new DriveStraight(drive, 0.5, DIST_FROM_WALL));
+			this.addSequential(new DriveGoToAngle(drive, 45));
 			this.addParallel(new PointToSwitchFront(arm));
-			this.addSequential(new DriveStraight(drive, 0.5, CENTER_PANEL_ALIGN_DISTANCE));
+			this.addSequential(new DriveStraight(drive, 0.5, X_DIST_RIGHT_HYP));
 			this.addSequential(new DriveGoToAngle(drive, 0));
-			this.addSequential(new DriveStraight(drive, 0.5, CENTER_STRAIGHT_DISTANCE));
+			this.addSequential(new DriveStraight(drive, 0.5, RIGHT_DIST_REMAINING_TO_SWITCH));
 			this.addSequential(new SetSqueezer(i, false));
+			}
+			else
+			{
+				this.addSequential(new DriveStraight(drive, 0.5, DIST_FROM_WALL));
+				this.addSequential(new DriveGoToAngle(drive, 45));
+				this.addParallel(new PointToSwitchFront(arm));
+				this.addSequential(new DriveStraight(drive, 0.5, X_DIST_LEFT_HYP));
+				this.addSequential(new DriveGoToAngle(drive, 0));
+				this.addSequential(new DriveStraight(drive, 0.5, LEFT_DIST_REMAINING_TO_SWITCH));
+				this.addSequential(new SetSqueezer(i, false));
+			}
 		}
 		else
 		{
