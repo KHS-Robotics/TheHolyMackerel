@@ -87,10 +87,14 @@ public class OI
 			
 			NavX = new AHRS(RobotMap.NAVX_PORT, RobotMap.NAVX_UPDATE_RATE_HZ);
 			
+			final double DPP = (1.0/1024.0)*(2*Math.PI*6);
+			
 			LeftDriveMotor = new Spark(RobotMap.DRIVE_LEFT);
 			RightDriveMotor = new Spark(RobotMap.DRIVE_RIGHT);
 			LeftDriveEncoder = new Encoder(RobotMap.DRIVE_LEFT_ENC_A, RobotMap.DRIVE_LEFT_ENC_B);
+			LeftDriveEncoder.setDistancePerPulse(DPP);
 			RightDriveEncoder = new Encoder(RobotMap.DRIVE_RIGHT_ENC_A, RobotMap.DRIVE_RIGHT_ENC_B);
+			RightDriveEncoder.setDistancePerPulse(DPP);
 			
 			Drive = new TankDrive(RightDriveMotor, LeftDriveMotor,  NavX, RightDriveEncoder, LeftDriveEncoder);
 			

@@ -42,5 +42,6 @@ public class MoveArmToSetpoint extends CommandBase {
 
 	@Override
 	protected void end() {
+		arm.stop();
 	}
 }

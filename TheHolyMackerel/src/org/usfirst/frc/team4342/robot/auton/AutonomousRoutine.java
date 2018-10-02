@@ -33,6 +33,7 @@ public abstract class AutonomousRoutine extends CommandGroup {
 		protected static final double DIST_BACK_TO_CUBE = 36.25;
 		protected static final double DIST_TO_CUBE = Math.sqrt(2*36.25);
 		
+		
 		// LEFT or RIGHT Switch
 		// Start Position and Switch location are the same
 		protected static final double LEFT_RIGHT_PANEL_ALIGN_DISTANCE = 168;

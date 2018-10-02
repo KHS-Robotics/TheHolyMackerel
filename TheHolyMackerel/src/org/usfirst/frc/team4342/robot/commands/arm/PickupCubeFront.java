@@ -7,7 +7,7 @@ import org.usfirst.frc.team4342.robot.subsystems.Arm;
  * the opponent has ownership
  */
 public class PickupCubeFront extends MoveArmToSetpoint {
-	private static final double GROUND_HEIGHT = 0;
+	private static final double GROUND_HEIGHT = 130;
 
 	/**
 	 * Sets the height of the elevator to place a cube on the scale when

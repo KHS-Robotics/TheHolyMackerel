@@ -28,5 +28,9 @@ public class Climber extends SubsystemBase{
 		motor.set(0);
 		
 	}
+	
+	public void reset() {
+		shooter.set(false);
+	}
 
 }

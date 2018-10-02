@@ -132,6 +132,7 @@ public class Robot extends TimedRobot {
 		Logger.info("Entering disabled...");
 		stopAutonomousRoutine();
 		Scheduler.getInstance().run();
+		OI.getInstance().Climber.reset();
 	}
 	
 	/**

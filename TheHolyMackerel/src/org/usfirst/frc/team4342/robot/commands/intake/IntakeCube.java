@@ -27,7 +27,6 @@ public class IntakeCube extends CommandBase
 
 	@Override
 	protected void initialize() {
-		accum.setSqueezer(false);
 		accum.enable();
 	}
 
@@ -41,7 +40,6 @@ public class IntakeCube extends CommandBase
 
 	@Override
 	protected void end() {
-		accum.setSqueezer(true);
 		accum.stop();
 	}
 
